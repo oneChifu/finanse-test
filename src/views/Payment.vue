@@ -1,10 +1,6 @@
 <template>
   <div class="pay">
-    <div 
-      class="pay__sidebar"
-      :class="{'pay__sidebar_opened': sidebarOpened}"
-      @click="sidebarOpened = !sidebarOpened"
-    >
+    <div class="pay__sidebar" :class="{'pay__sidebar_opened': sidebarOpened}" @click="sidebarOpened = !sidebarOpened">
       <div class="pay__sidebar-buying">
         <div class="pay__sidebar-buying-info">
           <div class="h2">You are buying</div>
@@ -33,7 +29,9 @@
         </div>
       </div>
 
-      <a href="https://onpay.ru/" target="_blank" class="pay__sidebar-provided">Provided by Onpay.ru</a>
+      <div class="pay__sidebar-provided">
+        <a href="https://onpay.ru/" target="_blank">Provided by Onpay.ru</a>
+      </div>
     </div>
     
     <div class="pay__content">
@@ -61,8 +59,8 @@
             v-for="(type, index) in paymentTypes" 
             :key="index"
             class="pay__methods-nav-item"
-            :class="{'active': type == methodTypeActive}"
-            @click="methodTypeActive = type"
+            :class="{'pay__methods-nav-item_active': type == methodTypeActive}"
+            @click="methodTypeActive = type, methodActive = {}"
           >{{ type }}</div>
         </div>
 
@@ -71,11 +69,11 @@
             v-for="(method, index) in paymentMethods" 
             :key="index" 
             class="pay__methods-item"
-            :class="{'pay__methods-item__active': method.id == methodActive.id}"
+            :class="{'pay__methods-item_active': method.id == methodActive.id}"
             @click="makeMethodActive(method.id)"
           >
             <div class="pay__methods-item-logo">
-              <img :src="`img/${method.logo}.png`" @error="$event.target.style.display = 'none'">
+              <img :src="method.logo" @error="imgError($event, method)">
             </div>
 
             <div class="pay__methods-item-title">{{ method.title }}</div>
@@ -89,7 +87,7 @@
 
         <ValidationObserver ref="paymentFormRef" v-slot="{ handleSubmit }" class="pay__payment-form">
           <form @submit.prevent="handleSubmit(onSubmit)">
-            <div class="form__group form__group_amount">
+            <div class="form__group pay__payment-form-amount">
               <label for="form__amount">Amount with commission</label>
 
               <div class="form__group-input">
@@ -133,7 +131,7 @@
               <label for="form__message">Message for seller</label>
 
               <div class="form__group-input">
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <textarea id="form__message" v-model="form.messange" placeholder="If you need additional services, please inform the seller about this"></textarea>
                 </ValidationProvider>
               </div>
@@ -158,12 +156,12 @@
               <div class="form__group-after"></div>
             </div>
 
-            <div class="pay__payment-form">
+            <div class="pay__payment-form-agree">
               By clicking "Confirm payment" I realize that the seller is responsible for the quality of the product/services and accept the <a href="#">terms of the agreement</a>
             </div>
 
             <div class=" pay__payment-form-submit">
-              <button type="submit" class="button button_primary">Confirm payment</button>
+              <button type="submit" class="button button_primary button_block">Confirm payment</button>
             </div>
           </form>
         </ValidationObserver>
@@ -187,7 +185,7 @@ export default {
     
     buying: {
       info: {
-        product: 'Flight in space /Jupiter Area',
+        product: 'Flight in space / Jupiter Area',
         from: 'IO',
         to: 'GANIMED, J29, 2048, G5/42',
         transport: "Queen of the Sun"
@@ -236,7 +234,7 @@ export default {
 
     paymentMethods() {
       return this.paymethods.filter(method => {
-        method.logo = method.id
+        method.logo = 'img/'+ method.id +'.png'
 
         if ( method.type == this.methodTypeActive ) {
           return method
@@ -246,24 +244,29 @@ export default {
   },
 
   methods: {
-    imgError(event) {
-      event.target.style.display = 'none';
-    },
+    imgError(event, method) {
+      let imageExists = require('image-exists');
+      let src = 'img/'+ method.id +'.png';
 
-    onSubmit () {
-      alert('Form has been submitted!');
+      imageExists(src, function(exists) {
+        if (exists) {
+          event.target.src = src
+        } else {
+          event.target.src = 'img/default.png';
+        }
+      })
     },
 
     makeMethodActive(id) {
       this.methodActive = this.paymethods.find(elem => elem.id == id)
-      this.methodTypeActive = this.methodActive.method
+      this.methodTypeActive = this.methodActive.type
       this.form.fees = (this.buying.price.amount / 100) * this.methodActive.fees
       this.form.price = this.form.fees + this.buying.price.amount
     },
 
-    handleSubmit() {
-
-    }
+    onSubmit () {
+      alert('Payment confirmed!');
+    },
   },
 
   beforeCreate() {
