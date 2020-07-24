@@ -1,0 +1,359 @@
+@font-face {
+    font-family: "Google Sans";
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url("//db.onlinewebfonts.com/t/371213c6129c24324f5aa2e2e61319af.eot"); 
+    src: url("//db.onlinewebfonts.com/t/371213c6129c24324f5aa2e2e61319af.eot?#iefix") format("embedded-opentype"), 
+    url("//db.onlinewebfonts.com/t/371213c6129c24324f5aa2e2e61319af.woff2") format("woff2"), 
+    url("//db.onlinewebfonts.com/t/371213c6129c24324f5aa2e2e61319af.woff") format("woff"), 
+    url("//db.onlinewebfonts.com/t/371213c6129c24324f5aa2e2e61319af.ttf") format("truetype"), 
+    url("//db.onlinewebfonts.com/t/371213c6129c24324f5aa2e2e61319af.svg#Google Sans") format("svg");
+}
+@font-face {
+    font-family: "Google Sans";
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url("//db.onlinewebfonts.com/t/0e3f1c9efebea39cb811fbb86c2fc53f.eot"); 
+    src: url("//db.onlinewebfonts.com/t/0e3f1c9efebea39cb811fbb86c2fc53f.eot?#iefix") format("embedded-opentype"), 
+    url("//db.onlinewebfonts.com/t/0e3f1c9efebea39cb811fbb86c2fc53f.woff2") format("woff2"), 
+    url("//db.onlinewebfonts.com/t/0e3f1c9efebea39cb811fbb86c2fc53f.woff") format("woff"), 
+    url("//db.onlinewebfonts.com/t/0e3f1c9efebea39cb811fbb86c2fc53f.ttf") format("truetype"), 
+    url("//db.onlinewebfonts.com/t/0e3f1c9efebea39cb811fbb86c2fc53f.svg#Google Sans Medium") format("svg");
+}
+@font-face {
+    font-family: "Google Sans";
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    font-display: swap;
+    src: url("//db.onlinewebfonts.com/t/000be6a5acfcd4e4a425e9f1bb6c80f0.eot"); 
+    src: url("//db.onlinewebfonts.com/t/000be6a5acfcd4e4a425e9f1bb6c80f0.eot?#iefix") format("embedded-opentype"), 
+    url("//db.onlinewebfonts.com/t/000be6a5acfcd4e4a425e9f1bb6c80f0.woff2") format("woff2"), 
+    url("//db.onlinewebfonts.com/t/000be6a5acfcd4e4a425e9f1bb6c80f0.woff") format("woff"), 
+    url("//db.onlinewebfonts.com/t/000be6a5acfcd4e4a425e9f1bb6c80f0.ttf") format("truetype"), 
+    url("//db.onlinewebfonts.com/t/000be6a5acfcd4e4a425e9f1bb6c80f0.svg#Google Sans") format("svg");
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    background: #ffffff;
+    font-family: 'Google Sans';
+    font-family: 'Google Sans', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #000000;
+}
+
+/* General */
+a {
+    text-decoration: none;
+    color: #2931EB;
+    border-bottom: 1px solid #BFC2F9;
+    position: relative;
+    margin-bottom: 0;
+}
+.h2 {
+    font-weight: 600;
+    color: #231F1F;
+    margin: 0 0 14px 0;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+/* Form */
+label {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #231F1F;
+    margin-bottom: 4px;
+    display: block;
+}
+select,
+input {
+    width: 100%;
+    height: 42px;
+    border: 2px solid #B3B3B3;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 16px;
+    line-height: 42px;
+    color: #231F1F;
+    padding: 0 16px;
+    font-weight: 500;
+    outline: none;
+
+    &:not([disabled]):active,
+    &:not([disabled]):focus {
+        border-color: #2931EB;
+    }
+
+    &[disabled] {
+        background: #EFEFEF;
+        border-color: #EFEFEF;
+    }
+}
+textarea {
+    width: 100%;
+    min-height: 84px;
+    border: 2px solid #B3B3B3;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231F1F;
+    padding: 10px 16px;
+    font-weight: 500;
+    outline: none;
+
+    &:active,
+    &:focus {
+        border-color: #2931EB;
+    }
+}
+textarea::placeholder,
+input::placeholder {
+    color: #B3B3B3;
+}
+
+.form {
+    &__group {
+        margin-bottom: 12px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        &-input {
+            width: 100%;
+            display: flex;
+            position: relative;
+
+            > span:nth-child(1) {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            > span > span {
+                color: #F00;
+                font-size: 12px;
+                line-height: 14px;
+                margin: 3px 0;
+            }
+        }
+
+        &-append {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 68px;
+            font-size: 14px;
+            color: #B3B3B3;
+            font-weight: 500;
+
+            &_after {
+                position: relative;
+            }
+        }
+
+        &_captcha {
+            .captcha {
+                padding-left: 10px;
+
+                img {
+                    max-height: 42px;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+/* Sidebar */
+.pay {
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+    max-width: 1200px;
+
+    &__sidebar {
+        background: linear-gradient(180deg, #2931EB 0%, #151CC3 100%);
+        color: #ffffff;
+
+        .h2 {
+            color: #ffffff;
+        }
+
+        @media (max-width: 575px) {
+            position: fixed;
+            z-index: 100;
+            height: 60px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 17px 16px;
+
+            &:after {
+                display: block;
+                content: '';
+                position: absolute;
+                bottom: 8px;
+                left: 50%;
+                margin-left: -14px;
+                width: 28px;
+                height: 2px;
+                background: #6066F3;
+                border-radius: 5px;
+            }
+
+            .h2 {
+                font-size: 20px;
+                line-height: 20px;
+                font-weight: 500;
+                margin-bottom: 14px;
+            }
+
+            &_opened {
+                height: auto;
+                width: calc(100% - 20px);
+                margin-left: 10px;
+                top: 10px;
+                box-shadow: 0px 4px 12px rgba(23, 30, 198, 0.35);
+                border-radius: 6px;
+
+                .pay__sidebar-buying-info {
+                    display: block;
+                    line-height: 24px;
+                }
+                .pay__sidebar-buying-price {
+                    margin-top: 14px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                    > div:nth-child(1) {
+                        order: -1;
+                        font-size: 28px;
+                        line-height: 36px;
+                        font-weight: 600;
+                    }
+                    > div:nth-child(2) {
+                        font-size: 15px;
+                        line-height: 19px;
+                        color: #B4B7F8;
+        
+                        span {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+
+            &-buying {
+                &-info {
+                    display: none;
+                }
+        
+                &-price {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+        
+                    > div:nth-child(1) {
+                        order: 2;
+                        font-size: 18px;
+                        line-height: 18px;
+                    }
+                    > div:nth-child(2) {
+                        font-size: 16px;
+                        line-height: 24px;
+        
+                        span {
+                            display: none;
+                        }
+                    }
+                }
+        
+                &-seller {
+                    display: none;
+                }
+            }
+
+            &-provided {
+                display: none;
+            }
+        }
+
+        @media (min-width: 576px) {
+            position: relative;
+            width: 410px;
+            overflow: auto;
+            padding: 36px 28px 42px 28px;
+            color: #ffffff;
+            
+            &-provided {
+                display: block;
+                position: absolute;
+                bottom: 32px;
+                left: 28px;
+                font-size: 18px;
+                line-height: 24px;
+                border-color: transparent;
+                color: #FFFFFF;
+
+                &:active,
+                &:hover {
+                    border-color: #BFC2F9;
+                }
+            }
+        }
+    }
+
+    &__content {
+        padding: 78px 16px 60px 16px;
+        width: 100%;
+    }
+
+    &__methods {
+        &-head {
+            &-limits {
+                @media (max-width: 575px) {
+                    display: none;
+                }
+            }
+        }
+
+        &-nav {
+            &_select {
+                margin-bottom: 36px;
+
+                @media (min-width: 576px) {
+                    display: none;
+                }
+            }
+
+            &_tabs {
+                @media (max-width: 575px) {
+                    display: none;
+                }
+            }
+        }
+
+        &-list {
+            @media (max-width: 575px) {
+                display: none;
+            }
+        }
+    }
+}
